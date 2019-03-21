@@ -29,17 +29,22 @@ Set the working directory to the image folder. Specify the training and the test
 
 ```{r wkdir, eval=FALSE}
 set.seed(2018)
+setwd("/Users/hyt/Documents/GitHub/Spring2019-Proj3-spring2019-proj3-grp3/doc")
 # setwd("~/Desktop/Fall18/GR5243_ADS/Assignment3/Fall2018-Proj3-Sec2-grp5/doc")
 # here replace it with your own path or manually set it in RStudio to where this rmd file is located. 
 # use relative path for reproducibility
 ```
 
 Provide directories for training images. Low-resolution (LR) image set and High-resolution (HR) image set will be in different subfolders. 
+
+
 ```{r}
-train_dir <- "../data/train_set/" # This will be modified for different data sets.
-train_LR_dir <- paste(train_dir, "LR/", sep="")
-train_HR_dir <- paste(train_dir, "HR/", sep="")
-train_label_path <- paste(train_dir, "label.csv", sep="") 
+getwd()
+train_dir <- "../../data/train_set/" # This will be modified for different data sets.
+#train_dir <- "../data/train_set_demo/" # This will be modified for different data sets.
+(train_LR_dir <- paste(train_dir, "LR/", sep=""))
+(train_HR_dir <- paste(train_dir, "HR/", sep=""))
+(train_label_path <- paste(train_dir, "label.csv", sep=""))
 ```
 
 ### Step 1: set up controls for evaluation experiments.
@@ -63,7 +68,7 @@ run.feature.test=TRUE # process features for test set
 Using cross-validation or independent test set evaluation, we compare the performance of models with different specifications. In this example, we use GBM with different `depth`. In the following chunk, we list, in a vector, setups (in this case, `depth`) corresponding to models that we will compare. In your project, you might compare very different classifiers. You can assign them numerical IDs and labels specific to your project. 
 
 ```{r model_setup}
-model_values <- c(2, 3, 4)
+model_values <- 3
 model_labels = paste("XGB with model depth =", model_values)
 ```
 
@@ -85,14 +90,14 @@ extra_label <- read.csv(train_label_path, colClasses=c("NULL", NA, NA))
   + Output: an RData file that contains extracted features and corresponding responses
 
 ```{r feature}
-source("../lib/feature.R")
+source("../../lib/feature.R")
 tm_feature_train <- NA
 if(run.feature.train){
   tm_feature_train <- system.time(dat_train <- feature(train_LR_dir, train_HR_dir))
   feat_train <- dat_train$feature
   label_train <- dat_train$label
 }
-save(dat_train, file="../output/feature_train.RData")
+save(dat_train, file="../../output/feature_train.RData")
 ```
 
 
@@ -108,28 +113,28 @@ Call the train model and test model from library.
   + Input: an R object that contains a trained classifier.
   + Output: an R object of response predictions on the test set. If there are multiple classifiers under evaluation, there should be multiple sets of label predictions. 
 ```{r loadlib}
-source("../lib/XGB/train.xgb.R")
-source("../lib/XGB/test.xgb.R")
+source("../../lib/XGB/train.xgb.R")
+source("../../lib/XGB/test.xgb.R")
 ```
 
 #### Model selection with cross-validation
 * Do model selection by choosing among different values of training model parameters, that is, the interaction depth for GBM in this example. 
 ```{r runcv, message=FALSE, warning=FALSE}
-source("../lib/XGB/cross_validation.xgboost.R")
+source("../../lib/XGB/cross_validation.xgb.R")
 if(run.cv){
   err_cv_xgboost <- array(dim=c(length(model_values), 2))
   for(k in 1:length(model_values)){
     cat("k=", k, "\n")
-    err_cv_xgboost[k,] <- cv.function_xgboost(feat_train, label_train, model_values[k], K)
+    err_cv_xgboost[k,] <- cv.xgboost(feat_train, label_train, model_values[k], K)
   }
-  save(err_cv_xgboost, file="../output/XGB/err_cv_xgboost.RData")
+  save(err_cv_xgboost, file="../../output/err_cv_xgboost.RData")
 }
 ```
 
 Visualize cross-validation results. 
 ```{r cv_vis}
 if(run.cv){
-  load("../output/XGB/err_cv_xgboost.RData")
+  #load("../output/XGB/err_cv_xgboost.RData")
   plot(model_values, err_cv_xgboost[,1], xlab="Interaction Depth", ylab="CV Error",
        main="Cross Validation Error", type="n", ylim=c(0, 0.25))
   points(model_values, err_cv_xgboost[,1], col="blue", pch=16)
@@ -153,9 +158,10 @@ par_best <- list(depth=model_best)
 ```{r final_train}
 tm_train=NA
 par_best <- NULL
-tm_train <- system.time(fit_train_xgboost_3_3 <- train_xgboost(feat_train, label_train, par_best))
-save(fit_train_xgboost_3_3, file="../output/XGB/fit_train_xgboost.RData")
+tm_train <- system.time(fit_train_xgboost <- train_xgboost(feat_train, label_train, par_best))
+save(fit_train_xgboost, file="../../output/fit_train_xgboost.RData")
 ```
+
 
 ### Step 5: Super-resolution for test images
 Feed the final training model with the completely holdout testing data. 
@@ -165,23 +171,27 @@ Feed the final training model with the completely holdout testing data.
   + Input: an R object that contains tuned predictors.
   + Output: construct high-resolution versions for each low-resolution test image.
 ```{r superresolution}
-source("../lib/superResolution.R")
-test_dir <- "../data/test_set/XGB/" # This will be modified for different data sets.
+source("../../lib/XGB/superResolution.xgb.R")
+test_dir <- "../../data/test_set/" # This will be modified for different data sets.
 test_LR_dir <- paste(test_dir, "LR/", sep="")
 test_HR_dir <- paste(test_dir, "HR/", sep="")
 tm_test=NA
 run.test <- T
 if(run.test){
-  load(file="../output/XGB/fit_train_xgboost.RData")
-  tm_test <- system.time(superResolution_xgboost(test_LR_dir, test_HR_dir, fit_train_xgboost_3_3))
+  load(file="../../output/fit_train_xgboost.RData")
+  tm_test <- system.time(superResolution(test_LR_dir, test_HR_dir, fit_train_xgboost))
 }
 ```
+
+
 
 ### Summarize Running Time
 Prediction performance matters, so does the running times for constructing features and for training the model, especially when the computation resource is limited. 
 ```{r running_time}
 cat("Time for constructing training features=", tm_feature_train[1], "s \n")
-cat("Time for constructing testing features=", tm_feature_test[1], "s \n")
+cat("Time for constructing testing features=", tm_test[1], "s \n")
 cat("Time for training model=", tm_train[1], "s \n")
 cat("Time for super-resolution=", tm_test[1], "s \n")
 ```
+
+

@@ -1,9 +1,4 @@
----
-title: "cross_validation_xgb"
-author: "Daniel Huang"
-date: "3/20/2019"
-output: pdf_document
----
+
 
 ########################
 ### Cross Validation ###
@@ -26,9 +21,9 @@ cv.xgboost <- function(X.train, y.train, d, K){
     
     par <- list(depth=d)
     cat("k = ", i, "\n")
-    fit <- train.xgboost(train.data, train.label, par)
+    fit <- train_xgboost(train.data, train.label, par)
     cat(i, "best tunning parameter","\n")
-    pred <- test.xgboost(fit, test.data)  
+    pred <- test_xgboost(fit, test.data)  
     cv.error[i] <- mean((pred - test.label)^2)  
     
   }			
