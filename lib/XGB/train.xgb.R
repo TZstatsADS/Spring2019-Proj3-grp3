@@ -22,11 +22,18 @@ train_xgboost <- function(dat_train, label_train, par=NULL){
   modelList <- list()
   
   ### Train with gradient boosting model
-  if(is.null(par)){
-    depth <- 3
-    
-  } else {
+
+  if(!is.null(par[["depth"]])) {
     depth <- par$depth
+  }
+  else {
+    depth <- 5
+  }
+  if(!is.null(par[["eta"]])) {
+    eta <- par$eta
+  }
+  else {
+    eta <- 0.5
   }
   
   ### the dimension of response arrat is * x 4 x 3, which requires 12 classifiers
@@ -37,10 +44,11 @@ train_xgboost <- function(dat_train, label_train, par=NULL){
     c2 <- (i-c1) %/% 4 + 1
     featMat <- dat_train[, , c2]
     labMat <- label_train[, c1, c2]
-    cat("Training model with depth: ", depth)
-    fit_xgboost <- xgboost(data = featMat, label = labMat,
+    cat("Training model with depth: ", depth, "\n")
+    cat("Training model with eta: ", eta, "\n")
+    fit_xgboost <- xgboost(booster=dart, data = featMat, label = labMat,
                            max_depth = depth,
-                           eta = 0.5,
+                           eta = eta,
                            nrounds = 10, verbose = 1)
     cat(" Tunning parameter i = ", i)
     modelList[[i]] <- list(fit=fit_xgboost)
