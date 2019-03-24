@@ -29,7 +29,8 @@ Set the working directory to the image folder. Specify the training and the test
 
 ```{r wkdir, eval=FALSE}
 set.seed(2018)
-setwd("/Users/hyt/Documents/GitHub/Spring2019-Proj3-spring2019-proj3-grp3/doc")
+#setwd("/Users/hyt/Documents/GitHub/Spring2019-Proj3-spring2019-proj3-grp3/doc")
+setwd("/Users/seungwookhan/Documents/Columbia/Senior/Applied Data Science/Spring2019-Proj3-spring2019-proj3-grp3/")
 # setwd("~/Desktop/Fall18/GR5243_ADS/Assignment3/Fall2018-Proj3-Sec2-grp5/doc")
 # here replace it with your own path or manually set it in RStudio to where this rmd file is located. 
 # use relative path for reproducibility
@@ -68,7 +69,7 @@ run.feature.test=TRUE # process features for test set
 Using cross-validation or independent test set evaluation, we compare the performance of models with different specifications. In this example, we use GBM with different `depth`. In the following chunk, we list, in a vector, setups (in this case, `depth`) corresponding to models that we will compare. In your project, you might compare very different classifiers. You can assign them numerical IDs and labels specific to your project. 
 
 ```{r model_setup}
-model_values <- 3
+model_values <- c(3,5,6,8)
 model_labels = paste("XGB with model depth =", model_values)
 ```
 
@@ -97,7 +98,7 @@ if(run.feature.train){
   feat_train <- dat_train$feature
   label_train <- dat_train$label
 }
-save(dat_train, file="../../output/feature_train.RData")
+#save(dat_train, file="../../output/feature_train.RData")
 ```
 
 
@@ -124,7 +125,7 @@ source("../../lib/XGB/cross_validation.xgb.R")
 if(run.cv){
   err_cv_xgboost <- array(dim=c(length(model_values), 2))
   for(k in 1:length(model_values)){
-    cat("k=", k, "\n")
+    cat("Running cross validation with depth: ", model_values[k], "\n")
     err_cv_xgboost[k,] <- cv.xgboost(feat_train, label_train, model_values[k], K)
   }
   save(err_cv_xgboost, file="../../output/err_cv_xgboost.RData")
@@ -150,6 +151,7 @@ if(run.cv){
 model_best=model_values[1]
 if(run.cv){
   model_best <- model_values[which.min(err_cv_xgboost[,1])]
+  cat("Best model is with depth: ", model_best, "\n")
 }
 par_best <- list(depth=model_best)
 ```

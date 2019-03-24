@@ -14,15 +14,14 @@ cv.xgboost <- function(X.train, y.train, d, K){
   cv.error <- rep(NA, K)
   
   for (i in 1:K){
+    cat("Cross validation with fold ", i, "\n")
     train.data <- X.train[s != i, ,]
     train.label <- y.train[s != i, ,]
     test.data <- X.train[s == i, ,]
     test.label <- y.train[s == i, ,]
     
     par <- list(depth=d)
-    cat("k = ", i, "\n")
     fit <- train_xgboost(train.data, train.label, par)
-    cat(i, "best tunning parameter","\n")
     pred <- test_xgboost(fit, test.data)  
     cv.error[i] <- mean((pred - test.label)^2)  
     

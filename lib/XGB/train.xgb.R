@@ -37,11 +37,11 @@ train_xgboost <- function(dat_train, label_train, par=NULL){
     c2 <- (i-c1) %/% 4 + 1
     featMat <- dat_train[, , c2]
     labMat <- label_train[, c1, c2]
+    cat("Training model with depth: ", depth)
     fit_xgboost <- xgboost(data = featMat, label = labMat,
                            max_depth = depth,
-                           nthread = 3,
                            eta = 0.5,
-                           nrounds = 100, verbose = 0)
+                           nrounds = 10, verbose = 1)
     cat(" Tunning parameter i = ", i)
     modelList[[i]] <- list(fit=fit_xgboost)
   }
