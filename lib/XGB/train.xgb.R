@@ -49,7 +49,7 @@ train_xgboost <- function(dat_train, label_train, par=NULL){
     fit_xgboost <- xgboost(booster=dart, data = featMat, label = labMat,
                            max_depth = depth,
                            eta = eta,
-                           nrounds = 10, verbose = 1)
+                           nrounds = 10, verbose = 0)
     cat(" Tunning parameter i = ", i)
     modelList[[i]] <- list(fit=fit_xgboost)
   }

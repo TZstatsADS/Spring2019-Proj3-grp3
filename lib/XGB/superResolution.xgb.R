@@ -30,7 +30,7 @@ pixeldim <- function(imgLR,d){
 ########
 
 
-superResolution <- function(LR_dir, HR_dir, modelList){
+superResolution <- function(LR_dir, HR_dir, pred_dir, modelList){
   
   
   ### Construct high-resolution images from low-resolution images with trained predictor
@@ -47,6 +47,7 @@ superResolution <- function(LR_dir, HR_dir, modelList){
   for(i in 1:n_files){
     imgLR <- readImage(paste0(LR_dir,  "img", "_", sprintf("%04d", i), ".jpg"))@.Data
     pathHR <- paste0(HR_dir,  "img", "_", sprintf("%04d", i), ".jpg")
+    pathPred <- paste0(pred_dir,  "img", "_", sprintf("%04d", i), ".jpg")
     totalpixel <- nrow(imgLR) * ncol(imgLR)
     featMat <- array(NA, c(totalpixel, 8, 3))
     
@@ -80,7 +81,7 @@ superResolution <- function(LR_dir, HR_dir, modelList){
     Total_PSNR <- c(Total_PSNR, PSNR)
     
     HR_Image <- Image(Highimgmat, colormode='Color')
-    writeImage(HR_Image,pathHR)
+    writeImage(HR_Image,pathPred)
     cat("Image", i)
   }
   print("Mean MSE:")
