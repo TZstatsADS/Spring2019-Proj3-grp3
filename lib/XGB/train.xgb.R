@@ -46,7 +46,7 @@ train_xgboost <- function(dat_train, label_train, par=NULL){
     labMat <- label_train[, c1, c2]
     cat("Training model with depth: ", depth, "\n")
     cat("Training model with eta: ", eta, "\n")
-    fit_xgboost <- xgboost(booster=dart, data = featMat, label = labMat,
+    fit_xgboost <- xgboost(booster="gblinear", data = featMat, label = labMat,
                            max_depth = depth,
                            eta = eta,
                            nrounds = 10, verbose = 0)
