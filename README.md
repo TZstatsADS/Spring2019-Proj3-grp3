@@ -40,7 +40,6 @@ Term: Spring 2019
 *Hongye Jiang*
 * Performed the baseline model,including the feature of images and Super-resolution imaging.
 * Tested different parameters and manipulated feature selection to improve the running time of the model. 
-* Brainstormed best training model for image resolution recovery, helped 
 
 *Mengran Xia*
 * Brainstormed together with the team on the best training model for image resolution recovery. 
