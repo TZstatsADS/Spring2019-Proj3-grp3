@@ -3,4 +3,4 @@
 
 ### Figs folder
 
-The figs directory contains the figures. This directory only contains generated files; that is, one should always be able to delete the contents and regenerate them.
+The figs directory contains the figures. This directory only contains sample repsented figures which are from orginal LR, HR and also from the one we generated from our GBM model and XGB model. 
