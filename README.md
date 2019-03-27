@@ -14,9 +14,12 @@ Term: Spring 2019
 	+ Mengran Xia
 	+ Hongye Jiang
 
-+ Project summary: In this project, we created a classification engine for enhance the resolution of images. We created two versions: baseline model using gbm and an improved model using xgboost (with tuned parameters). The baseline model is in /doc/main.Rmd and the improved model is in /doc/main.xgb.Rmd. We also considered using deep learning method and tested CNN model. We used depth = 11 for the baseline model, and trained three Booster methods: GBtree, GBlinear and Dart. These models were than each ran through cross validation with the tuning of alpha and lambda. Based on the performance, GBlinear has a much better performance with more efficient running time. 
++ Project summary: In this project, we created a classification engine for enhance the resolution of images. We created two versions: baseline model using gbm and an improved model using xgboost (with tuned parameters). The baseline model is in /doc/main.Rmd and the improved model is in /doc/main.xgb.Rmd. We also considered using deep learning method and tested CNN model. We used depth = 11 for the baseline model, and trained three Booster methods: GBtree, GBlinear and Dart. These models were than each ran through cross validation with the tuning of alpha and lambda. Based on the performance, GBlinear performs the best amongst the three methods.
 ![image](figs/performance.png) 
-we eventually decided to choose 8 neighbors feature extracting and XGboost linear model with depth of 11 to predict the high resolution pircture from low resolution pictures.
+
+GBlinear's MSE and PSNR do not differ much from baseline Model, this may due to two reasons: 1: the test dataset of 50 pictures is too small. 2: Alpha and Lambda were cross validated and tuned separately, the result might improve if tuned together. This is something we can explore and improve in the future. However, the running time was shortened drastically with 11 seconds on the test dataset comparing with 102 seconds for the original baseline model. 
+
+Conclusion: we eventually decided to choose 8 neighbors feature extracting and XGboost linear model with depth of 11 to predict the high resolution pircture from low resolution pictures.
 
 + Notes: In order to run main.Rmd or main.xgb.Rmd, some basic paths that need to be modified or inspected before running the document are the setting the working directory in line 33, training directory in line 44 (if you need to change the training images), and testing directory in line 181 (if you need to change the testing images).
 
@@ -46,7 +49,7 @@ we eventually decided to choose 8 neighbors feature extracting and XGboost linea
 *Mengran Xia*
 * Brainstormed together with the team on the best training model for image resolution recovery. 
 * Performed the XGBoost model (train function, test function, cross validation fucntion) and tuned parameters on depth to get mse, psnr and running time. 
-* Organized the Github Directory and finished the writeup of Read Me. 
+* Organized the Github Directory, uploaded all files and finished the writeup of Read Me. 
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
