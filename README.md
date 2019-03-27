@@ -36,7 +36,8 @@ Term: Spring 2019
 * Constructed the XGBoost model (main.xgb, superresolution.xgb) and tuned parameters. [GBTree booster:max_depth] (together with Shengwei Huang)
 * Collect the results from different models and summarized them to make presentation powerpoint.
 
-
+Hongye Jiang 
+* wrote the baseline model, including the feature of images and Super-resolution imaging.
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
