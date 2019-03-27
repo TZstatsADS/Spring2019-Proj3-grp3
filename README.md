@@ -14,7 +14,9 @@ Term: Spring 2019
 	+ Mengran Xia
 	+ Hongye Jiang
 
-+ Project summary: In this project, we created a classification engine for enhance the resolution of images. We created two versions: baseline model using gbm and an improved model using xgboost (with tuned parameters). The baseline model is in /doc/main.Rmd and the improved model is in /doc/main.xgb.Rmd. We also considered using deep learning method and tested CNN model. We used depth = 11 for the baseline model, and trained three Booster methods: GBtree, GBlinear and Dart. These models were than each ran through cross validation with the tuning of alpha and lambda. Based on the performance, we eventually decided to choose 8 neighbors feature extracting and XGboost linear model with depth of 11 to predict the high resolution pircture from low resolution pictures.
++ Project summary: In this project, we created a classification engine for enhance the resolution of images. We created two versions: baseline model using gbm and an improved model using xgboost (with tuned parameters). The baseline model is in /doc/main.Rmd and the improved model is in /doc/main.xgb.Rmd. We also considered using deep learning method and tested CNN model. We used depth = 11 for the baseline model, and trained three Booster methods: GBtree, GBlinear and Dart. These models were than each ran through cross validation with the tuning of alpha and lambda. Based on the performance, GBlinear has a much better performance with more efficient running time. 
+![image](figs/performance.png) 
+we eventually decided to choose 8 neighbors feature extracting and XGboost linear model with depth of 11 to predict the high resolution pircture from low resolution pictures.
 
 + Notes: In order to run main.Rmd or main.xgb.Rmd, some basic paths that need to be modified or inspected before running the document are the setting the working directory in line 33, training directory in line 44 (if you need to change the training images), and testing directory in line 181 (if you need to change the testing images).
 
