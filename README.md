@@ -37,12 +37,12 @@ Term: Spring 2019
 * Constructed the XGBoost model (main.xgb, superresolution.xgb) and tuned parameters. [GBTree booster:max_depth] (together with Shengwei Huang)
 * Collect the results from different models and summarized them to make presentation powerpoint.
 
-Hongye Jiang 
+*Hongye Jiang*
 * Performed the baseline model,including the feature of images and Super-resolution imaging.
 * Tested different parameters and manipulated feature selection to improve the running time of the model. 
 * Brainstormed best training model for image resolution recovery, helped 
 
-Mengran Xia:
+*Mengran Xia*
 * Brainstormed together with the team on the best training model for image resolution recovery. 
 * Performed the XGBoost model (train function, test function, cross validation fucntion) and tuned parameters on depth to get mse, psnr and running time. 
 * Organized the Github Directory and finished the writeup of Read Me. 
