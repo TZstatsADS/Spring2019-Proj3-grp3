@@ -38,7 +38,14 @@ Term: Spring 2019
 * Collect the results from different models and summarized them to make presentation powerpoint.
 
 Hongye Jiang 
-* wrote the baseline model, including the feature of images and Super-resolution imaging.
+* Performed the baseline model,including the feature of images and Super-resolution imaging.
+* Tested different parameters and manipulated feature selection to improve the running time of the model. 
+* Brainstormed best training model for image resolution recovery, helped 
+
+Mengran Xia:
+* Brainstormed together with the team on the best training model for image resolution recovery. 
+* Performed the XGBoost model (train function, test function, cross validation fucntion) and tuned parameters on depth to get mse, psnr and running time. 
+* Organized the Github Directory and finished the writeup of Read Me. 
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
