@@ -29,6 +29,12 @@ Shengwei Huang
 * Chose the best pair of tuning parameters which can minimize the mean squared error / maximize the psnr or minimize the training time and superResolution time
 * Explored more (50) random images to do the testing so that we can see how our model would perform when recovering other types of images
 
+Yuting He:
+* Updated baseline model (main, super resolution, test, train), trained baseline model to get fit_train, tested baseline model to get mse, psnr and running time.
+* Constructed the XGBoost model (main.xgb, superresolution.xgb) and tuned parameters. [GBTree booster:max_depth] (together with Shengwei Huang)
+* Collect the results from different models and summarized them to make presentation powerpoint.
+
+
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
 
