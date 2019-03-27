@@ -1,7 +1,6 @@
 # Project: Can you unscramble a blurry image? 
-![image](figs/Picture1.png) ![image](figs/Picture2.png)
-![image](figs/Picture3.png) ![image](figs/Picture4.png)
-
+![image](figs/Picture1.png)   (Low Rsesolution) ![image](figs/Picture2.png) (Baseline Recovered)
+![image](figs/Picture3.png)   (XGB Recovered)   ![image](figs/Picture4.png)   (High Resolution)            
 
 ### [Full Project Description](doc/project3_desc.md)
 
