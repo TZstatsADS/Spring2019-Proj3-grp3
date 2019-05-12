@@ -29,7 +29,9 @@ Conclusion: we eventually decided to choose 8 neighbors feature extracting and X
 * Brainstormed and researched on deep learning-based models that we can use for the super resolution task
 * Tried to implement a deep CNN model for the super resolution task (https://github.com/jiny2001/dcscn-super-resolution/)
 * Explored and implemented different options for improving the xgboost model by changing and optimizing the parameters (max_depth, nrounds, booster, etc)
-* Researched new datasets that we could use as a validation set to ensure the performance of our improved model
+* Researched and discovered new datasets that we could use as our own test dataset to ensure the performance of our improved model
+* Did most of the work to fine-tune the parameters of the final xgboost model for submission (notably, cut down the training time from 30 minutes to 2-3minutes)
+* Major contributor and participated in every stage of the project cycle
 
 *Shengwei Huang*
 * Constructed the basic XGBoost model (train function, test function, cross validation fucntion)
@@ -48,7 +50,7 @@ Conclusion: we eventually decided to choose 8 neighbors feature extracting and X
 
 *Mengran Xia*
 * Brainstormed together with the team on the best training model for image resolution recovery. 
-* Performed the XGBoost model (train function, test function, cross validation fucntion) and tuned parameters on depth to get mse, psnr and running time. 
+* Used the XGBoost model and reported on the accuracy/results
 * Organized the Github Directory, uploaded all files and finished the writeup of Read Me. 
 
 Following [suggestions](http://nicercode.github.io/blog/2013-04-05-projects/) by [RICH FITZJOHN](http://nicercode.github.io/about/#Team) (@richfitz). This folder is orgarnized as follows.
