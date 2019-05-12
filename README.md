@@ -6,7 +6,7 @@
 
 Term: Spring 2019
 
-+ Team ##
++ Team 3
 + Team members
 	+ Yuting He
 	+ Seungwook Han
